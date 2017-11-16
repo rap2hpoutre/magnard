@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="assets/style.css">
+    <script src="assets/vue.js"></script>
+    <script src="assets/data.js"></script>
+    <title>Webdoc</title>
+</head>
+
+<body>
+    <div id="app">
+
+        <!-- Menu des onglets principaux -->
+        <div id="tabs">
+            <div class="tab" v-bind:id="tab.id" v-for="tab in tabs">
+                <a v-on:click="select(tab)">
+                    {{ tab.label }}
+                </a>
+            </div>
+        </div>
+
+        <!-- Menu des sous-onglets -->
+        <div id="sub-tabs" v-if="subTabsVisible()">
+            <div class="sub-tab" v-bind:id="subTab.id" v-for="subTab in currentTab.subTabs" v-if="!subTab.hidden">
+                <a v-on:click="selectSub(subTab)">
+                    {{ subTab.label }}
+                </a>
+            </div>
+        </div>
+
+        <!-- Contenu du sous onglet -->
+        <div id="content" v-if="currentSubTab">
+
+            <!-- Titre (optionnel) -->
+            <h1 v-if="currentSubTab.title">
+                {{ currentSubTab.title }}
+            </h1>
+
+            <!-- Sous-titre (optionnel) -->
+            <h2 v-if="currentSubTab.subtitle">
+                {{ currentSubTab.subtitle }}
+            </h2>
+
+            <!-- Texte (optionnel) -->
+            <p v-if="currentSubTab.text">
+                {{ currentSubTab.text }}
+            </p>
+
+            <!-- Image (optionnelle) -->
+            <!-- <img v-if="currentSubTab.image" v-bind:src="currentSubTab.image" /> -->
+
+            <!-- Vidéo (optionnel) -->
+            <p v-if="currentSubTab.video">
+                Vidéo: TODO !
+            </p>
+
+            <!-- Infos (optionnel) -->
+            <div class="info" v-if="currentSubTab.info">
+                <a v-on:click="toggle(currentSubTab.info)">Infos</a>
+                <!-- Le contenu de la zone "À savoir" (qui est caché par défaut) -->
+                <div class="learn-content" v-if="!currentSubTab.info.hidden">
+                    {{ currentSubTab.info.text }}
+                </div>
+            </div>
+
+            <!-- À savoir (optionnel) -->
+            <div class="learn" v-if="currentSubTab.learn">
+                <a v-on:click="toggle(currentSubTab.learn)">À savoir</a>
+                <!-- Le contenu de la zone "À savoir" (qui est caché par défaut) -->
+                <div class="learn-content" v-if="!currentSubTab.learn.hidden">
+                    <p v-for="p in currentSubTab.learn.paragraphs" :class="{bold: p.style == 'bold'}">
+                        {{ p.text }}
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="assets/app.js"></script>
+</body>
+
+</html>

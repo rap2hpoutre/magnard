@@ -1,0 +1,31 @@
+/* 
+    Je n'ai mis (quasiment) aucun style, pour laisser un maximum de liberté dans le design.
+    Chaque onglet et sous-onglet a une classe et un identifiant, il et donc possible 
+    d'appliquer des styles sur tous les éléments affichés sans trop de problèmes.
+
+    Tu peux tout supprimer.
+*/
+
+body {
+    max-width: 800px;
+    margin: 2rem auto;
+}
+
+#sub-tabs, #content, #tabs, .learn, .info {
+    width: 100%;
+    border: 1px dashed #ddd;
+    margin: 0;
+}
+
+.tab, .sub-tab {
+    margin: 2rem;
+    display: inline-block;
+}
+
+img {
+    max-width: 100%;
+}
+
+.bold {
+    font-weight: bold;
+}
